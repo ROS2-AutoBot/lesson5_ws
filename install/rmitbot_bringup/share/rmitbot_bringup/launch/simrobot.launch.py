@@ -5,6 +5,14 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     # Launch Gazebo with the robot model
+    rviz = IncludeLaunchDescription(
+        os.path.join(
+            get_package_share_directory("rmitbot_description"),
+            "launch",
+            "display.launch.py"
+        ),
+    )
+    
     gazebo = IncludeLaunchDescription(
         os.path.join(
             get_package_share_directory("rmitbot_description"),
@@ -36,6 +44,7 @@ def generate_launch_description():
     
     
     return LaunchDescription([
+        rviz, 
         gazebo,
         controller,
         teleopkeyboard,
